@@ -1,12 +1,21 @@
 <?php
-
+ 
 namespace App\Http\Controllers;
-
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Routing\Controller as BaseController;
-
-class Controller extends BaseController
+ 
+use App\Http\Controllers\Controller;
+use App\Models\User;
+use Inertia\Inertia;
+use Inertia\Response;
+ 
+class UserController extends Controller
 {
-    use AuthorizesRequests, ValidatesRequests;
+    /**
+     * Show the profile for a given user.
+     */
+    public function show(string $id): Response
+    {
+        return Inertia::render('Users/Profile', [
+            'user' => User::findOrFail($id)
+        ]);
+    }
 }
